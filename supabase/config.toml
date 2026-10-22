@@ -1,0 +1,14 @@
+# Minimal config for the Supabase CLI (`npx supabase start`). Defaults cover everything else.
+project_id = "studentmind"
+
+[db]
+major_version = 17
+
+[auth]
+site_url = "http://localhost:3000"
+additional_redirect_urls = ["http://localhost:3000/auth/callback"]
+enable_signup = true
+
+[auth.email]
+enable_signup = true
+enable_confirmations = true

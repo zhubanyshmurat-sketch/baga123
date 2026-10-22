@@ -1,0 +1,269 @@
+@import "tailwindcss";
+@import "@fontsource-variable/inter/index.css";
+
+/*
+ * StudentMind design tokens.
+ * Every text/background pair below is checked against WCAG 2.1 AA in tests/contrast.test.ts.
+ * Light is the default; the dark palette applies via [data-theme="dark"] (set by the
+ * theme script before first paint) and, without JS, via prefers-color-scheme.
+ */
+:root {
+  --bg: #f7f8fc;
+  --surface: #ffffff;
+  --surface-2: #eef1f8;
+  --border: #dde2ee;
+  --border-strong: #7a869f;
+  --fg: #1f2a44;
+  --muted: #55617c;
+
+  --primary: #2eb5a6;
+  --on-primary: #0d2a2d;
+  --primary-strong: #0b766b;
+  --primary-soft: #e0f5f2;
+
+  --accent: #8c7bea;
+  --on-accent: #151030;
+  --accent-strong: #5b49c9;
+  --accent-soft: #ece9fc;
+
+  --coral: #f26b5b;
+  --on-coral: #2a0f0c;
+  --coral-strong: #b3321f;
+  --coral-soft: #fde8e5;
+
+  --ring: #5b49c9;
+  --shadow-card: 0 1px 2px rgb(31 42 68 / 0.05), 0 10px 28px rgb(31 42 68 / 0.07);
+  color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --bg: #0f1424;
+  --surface: #182037;
+  --surface-2: #212a45;
+  --border: #2c3656;
+  --border-strong: #7d89ab;
+  --fg: #edf0fa;
+  --muted: #a9b3cf;
+
+  --primary: #3cc9b9;
+  --on-primary: #06231f;
+  --primary-strong: #5fddce;
+  --primary-soft: #12302f;
+
+  --accent: #9c8cf5;
+  --on-accent: #120c2e;
+  --accent-strong: #b9aeff;
+  --accent-soft: #25214a;
+
+  --coral: #f58475;
+  --on-coral: #2a0f0c;
+  --coral-strong: #ff9c8f;
+  --coral-soft: #3a1e22;
+
+  --ring: #b9aeff;
+  --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px rgb(0 0 0 / 0.35);
+  color-scheme: dark;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --bg: #0f1424;
+    --surface: #182037;
+    --surface-2: #212a45;
+    --border: #2c3656;
+    --border-strong: #7d89ab;
+    --fg: #edf0fa;
+    --muted: #a9b3cf;
+    --primary: #3cc9b9;
+    --on-primary: #06231f;
+    --primary-strong: #5fddce;
+    --primary-soft: #12302f;
+    --accent: #9c8cf5;
+    --on-accent: #120c2e;
+    --accent-strong: #b9aeff;
+    --accent-soft: #25214a;
+    --coral: #f58475;
+    --on-coral: #2a0f0c;
+    --coral-strong: #ff9c8f;
+    --coral-soft: #3a1e22;
+    --ring: #b9aeff;
+    --shadow-card: 0 1px 2px rgb(0 0 0 / 0.3), 0 10px 28px rgb(0 0 0 / 0.35);
+    color-scheme: dark;
+  }
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-fg: var(--fg);
+  --color-muted: var(--muted);
+  --color-primary: var(--primary);
+  --color-on-primary: var(--on-primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-soft: var(--primary-soft);
+  --color-accent: var(--accent);
+  --color-on-accent: var(--on-accent);
+  --color-accent-strong: var(--accent-strong);
+  --color-accent-soft: var(--accent-soft);
+  --color-coral: var(--coral);
+  --color-on-coral: var(--on-coral);
+  --color-coral-strong: var(--coral-strong);
+  --color-coral-soft: var(--coral-soft);
+  --color-ring: var(--ring);
+
+  --font-sans: "Inter Variable", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto,
+    "Noto Sans", Arial, sans-serif;
+
+  --radius-card: 1.25rem;
+  --radius-pill: 999px;
+  --shadow-soft: var(--shadow-card);
+
+  --animate-fade-up: fade-up 0.3s ease-out both;
+  --animate-pop: pop 0.3s ease-out both;
+}
+
+@keyframes fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes breathe {
+  0%,
+  100% {
+    transform: scale(0.94);
+  }
+  50% {
+    transform: scale(1.06);
+  }
+}
+
+@keyframes pop {
+  0% {
+    transform: scale(0.9);
+  }
+  60% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+html {
+  font-size: 16px;
+  -webkit-text-size-adjust: 100%;
+  scroll-padding-top: 5rem;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+  font-family: var(--font-sans);
+  line-height: 1.5;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+::selection {
+  background: var(--primary);
+  color: var(--on-primary);
+}
+
+/* Respect the "reduce motion" setting: no decorative animation, instant transitions. */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* Long-form article / topic text rendered from markdown. */
+.prose-content {
+  font-size: 1.0625rem;
+  line-height: 1.7;
+  color: var(--fg);
+  overflow-wrap: break-word;
+}
+.prose-content > * + * {
+  margin-top: 1rem;
+}
+.prose-content h2 {
+  margin-top: 2rem;
+  font-size: 1.375rem;
+  line-height: 1.3;
+  font-weight: 700;
+}
+.prose-content h3 {
+  margin-top: 1.5rem;
+  font-size: 1.1875rem;
+  line-height: 1.35;
+  font-weight: 650;
+}
+.prose-content ul,
+.prose-content ol {
+  padding-left: 1.4rem;
+}
+.prose-content ul {
+  list-style: disc;
+}
+.prose-content ol {
+  list-style: decimal;
+}
+.prose-content li + li {
+  margin-top: 0.4rem;
+}
+.prose-content li::marker {
+  color: var(--primary-strong);
+}
+.prose-content a {
+  color: var(--primary-strong);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.prose-content blockquote {
+  border-left: 4px solid var(--accent);
+  background: var(--accent-soft);
+  padding: 0.75rem 1rem;
+  border-radius: 0 0.75rem 0.75rem 0;
+  color: var(--fg);
+}
+.prose-content strong {
+  font-weight: 650;
+}
+
+/* Visually hidden but available to assistive tech. */
+.sr-only-text {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+dialog::backdrop {
+  background: rgb(15 20 36 / 0.55);
+  backdrop-filter: blur(2px);
+}
